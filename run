@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dir=$(dirname $0)
-classdir=$dir/out/production/signboard
+classdir=$dir/out/production/signboard-group-7
 if ! [[ -d $classdir ]]; then
   echo "missing $classdir; have you compiled your code?" >&2
   exit 1
