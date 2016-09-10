@@ -207,6 +207,8 @@ public class Main {
 
             zombieWalk(signBoard, 8);
             truckDrive(signBoard, 30);
+
+//
         }
     }
 }
