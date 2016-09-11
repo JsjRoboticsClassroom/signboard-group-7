@@ -115,15 +115,100 @@ public class Main {
         }
     }
 
+    public static void zombieWalk(SignBoard board, int cycles) {
+        int width = board.getWidth();
+        int leftPosition = width / 15 - 5;
+        int middlePosition = width / 4 - 7;
+        int rightPosition = width / 2 + 10;
+        int y = board.getHeight() / 2;
+
+        for (int i = 0; i < cycles * 2; i++) {
+            SignBoard.Frame frame = board.newFrame();
+            frame.setWhite();
+            frame.write(leftPosition, y - 1, "    +            +     ");
+            frame.write(leftPosition, y, "  .-:-.        .-:-.    ");
+            frame.write(leftPosition, y + 1, " / RIP \\      / RIP \\  ");
+            frame.write(leftPosition, y + 2, " |     |      |     |   ");
+            frame.write(leftPosition, y + 3, "\\\\     |//   \\\\     |//");
+
+            frame.setRed();
+            frame.write(middlePosition + i, y - 4, "dMM+                 dMM+");
+            frame.write(middlePosition + i, y - 3, " :mMh`                :mMh`");
+            frame.write(middlePosition + i, y - 2, " +zxzxzxmho/          +zxzxzmdmho/");
+            frame.write(middlePosition + i, y - 1, " :zxzdhyyos:          :zxzdhyyos:");
+            frame.write(middlePosition + i, y, "  hMMMo                hMMMo");
+            if (i % 2 == 0) {
+                frame.write(middlePosition + i, y + 1, "  sMo MMo              sMo MMo");
+                frame.write(middlePosition + i, y + 2, "   ym` yMM+             ym` yMM+");
+                frame.write(middlePosition + i, y + 3, "   dm:  os-             dm:  os-");
+            } else {
+                frame.write(middlePosition + i, y + 1, "  sMo  MMo             sMo  MMo");
+                frame.write(middlePosition + i, y + 2, "   ym`  yMM+            ym`  yMM+");
+                frame.write(middlePosition + i, y + 3, "    dm:  os-             dm:  os-");
+            }
+
+            if (i % 2 == 0) {
+                frame.setGreen();
+                frame.write(rightPosition, y - 4, "        ______________________");
+                frame.write(rightPosition, y - 3, "       |                      |");
+                frame.write(rightPosition, y - 2, "       |  _______________   __|");
+                frame.write(rightPosition, y - 1, "       | |               |  |----.");
+                frame.write(rightPosition, y, "       | |_______________|  | |O,|____");
+                frame.write(rightPosition, y + 1, "  @    |  .-.          .-.  | -  .-.  |");
+                frame.write(rightPosition, y + 2, "  `@@ =(_| @ |________| @ |_|___| @ |_) ");
+                frame.write(rightPosition, y + 3, "          `-'          '-'       `-'");
+            } else {
+                frame.setYellow();
+                frame.write(rightPosition, y - 3, "        ______________________");
+                frame.write(rightPosition, y - 2, "       |                      |");
+                frame.write(rightPosition, y - 1, "       |  _______________   __|");
+                frame.write(rightPosition, y, "       | |               |  |----.");
+                frame.write(rightPosition, y + 1, "       | |_______________|  | |O,|____");
+                frame.write(rightPosition, y + 2, "  @    |  .-.          .-.  | -  .-.  |");
+                frame.write(rightPosition, y + 3, "  `@@ =(_| @ |________| @ |_|___| @ |_) ");
+            }
+            frame.finish(0.25);
+        }
+    }
+
+    public static void truckDrive(SignBoard board, int cycles) {
+        int width = board.getWidth();
+        int leftPosition = width / 15 - 5;
+        int y = board.getHeight() / 2;
+
+        for (int i = 0; i < cycles * 2; i++) {
+            SignBoard.Frame frame = board.newFrame();
+
+            frame.setGreen();
+            frame.write(leftPosition + i, y - 4, "        ______________________");
+            frame.write(leftPosition + i, y - 3, "       |                      |");
+            frame.write(leftPosition + i, y - 2, "       |  _______________   __|");
+            frame.write(leftPosition + i, y - 1, "       | |               |  |----.");
+            frame.write(leftPosition + i, y, "       | |_______________|  | |O,|____");
+            frame.write(leftPosition + i, y + 1, "  @    |  .-.          .-.  | -  .-.  |");
+            frame.write(leftPosition + i, y + 2, "  `@@ =(_| @ |________| @ |_|___| @ |_) ");
+            frame.write(leftPosition + i, y + 3, "          `-'          '-'       `-'");
+
+            frame.finish(0.02);
+
+        }
+    }
+
+
     public static void main(String[] args) {
         SignBoard signBoard = new SignBoard(8);
 
         // Run the sign board forever.
         while (true) {
-            ribbonScene(signBoard, 48);
-            scrollTextScene(signBoard, "###  F A L A F E L  ###");
-            ribbonScene(signBoard, 48);
-            flashFreshHotScene(signBoard, 8);
+//            ribbonScene(signBoard, 48);
+//            scrollTextScene(signBoard, "###  F A L A F E L  ###");
+//            ribbonScene(signBoard, 48);
+//            flashFreshHotScene(signBoard, 8);
+
+            zombieWalk(signBoard, 8);
+            truckDrive(signBoard, 30);
+
+//
         }
     }
 }
